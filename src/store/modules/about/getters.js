@@ -1,5 +1,3 @@
 export default {
-  countLinks: state => {
-    return state.links.length
-  }
-}
+  countLinks: state => state.links.length,
+};

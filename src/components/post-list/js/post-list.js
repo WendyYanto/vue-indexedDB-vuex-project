@@ -1,18 +1,18 @@
-import {mapMutations} from 'vuex'
+import { mapMutations } from 'vuex';
 
 export default {
-  name: "PostList", 
+  name: 'PostList',
   props: {
     data: Object,
-    fontSize: Number
+    fontSize: Number,
   },
   methods: {
     ...mapMutations('about', [
-      'removeLink'
+      'removeLinkByIndex',
     ]),
-    deleteLink(index){
-      let self = this
-      self.removeLink(index)
-    }
-  },
-}
+    deleteLink(index) {
+      const self = this;
+      self.removeLinkByIndex(index);
+    },
+  }
+};

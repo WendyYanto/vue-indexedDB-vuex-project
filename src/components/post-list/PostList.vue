@@ -1,15 +1,20 @@
-<template>  
-  <li class="postList" 
-      @click="deleteLink(data.index)"
-      :style="{ fontSize: `${fontSize}px` }">
-    {{ data.text }}
-  </li>
+<template>
+  <li
+    class="postList"
+    @click="deleteLink(data.index)"
+    :style="{ fontSize: `${fontSize}px` }"
+  >{{ data.text }}</li>
 </template>
 
 <script src="./js/post-list.js"></script>
 
 <style scoped>
-  .postList {
-    padding: 10px;
-  }
+.postList {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.postList:hover {
+  color: red;
+}
 </style>

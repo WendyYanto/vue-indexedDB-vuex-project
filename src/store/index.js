@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import about from './modules/about'
+import about from './modules/about';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    about
-  }
-})
+    about,
+  },
+});
 
-export default store
+export default store;

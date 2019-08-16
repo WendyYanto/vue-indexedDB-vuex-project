@@ -1,17 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" src="@/assets/logo.png" />
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
+import { mapMutations } from "vuex";
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    HelloWorld,
+    HelloWorld
   },
+  methods: {
+    ...mapMutations("about", ["setTitle"])
+  },
+  created: function() {
+    this.setTitle("Hello World");
+  }
 };
 </script>

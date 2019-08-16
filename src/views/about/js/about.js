@@ -1,55 +1,60 @@
-import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
-const PostList = () => import('@/components/post-list/PostList')
+import {
+  mapState, mapGetters, mapMutations, mapActions,
+} from 'vuex';
+import idbs from '@/idb/index'
+const PostList = () => import('@/components/post-list/PostList');
 
 export default {
   name: 'About',
   components: {
-    PostList
+    PostList,
   },
   data() {
     return {
-      newLink: "",
-      fontSize: 18
-    }
+      link: '',
+      fontSize: 18,
+    };
   },
   computed: {
     ...mapState('about', [
-      "title",
-      "links"
+      'title',
+      'links',
     ]),
     ...mapGetters('about', [
-      "countLinks"
-    ])
-  }, 
+      'countLinks',
+    ]),
+  },
   methods: {
     ...mapMutations('about', [
       'addLink',
-      'removeAllLinks'
+      'removeAllLinks',
     ]),
     ...mapActions('about', [
-      'removeAll'
+      'removeAll',
     ]),
-    createLink(){
-      let self = this
-      if (self.newLink) {
-        this.addLink(self.newLink)
-        this.newLink = ''
+    async createLink() {
+      const self = this;
+      if (self.link) {
+        await idbs.create('posts', self.link)
+        this.addLink(self.link);
+        this.link = '';
       }
     },
-    reset(){
+    async reset() {
+      await idbs.deleteAll('posts')
       if (this.countLinks === 0) {
-        alert("No Data Available");
+        alert('No Data Available');
         return;
       }
       this.removeAll().then(() => {
-        alert('All Data Removed Successfully')
-      })
+        alert('All Data Removed Successfully');
+      });
     },
-    increaseFontSize(){
-      this.fontSize += 2
+    increaseFontSize() {
+      this.fontSize += 2;
     },
-    decreaseFontSize(){
-      this.fontSize -= 2
-    }
+    decreaseFontSize() {
+      this.fontSize -= 2;
+    },
   },
-}
+};

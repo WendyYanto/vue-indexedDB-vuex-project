@@ -1,3 +1,5 @@
+import { invoke } from "q";
+
 export default {
   addLink: (state, link) => {
     state.links.push(link);
@@ -10,5 +12,8 @@ export default {
   },
   setTitle: (state, title) => {
     state.title = title
+  },
+  getAllLinks: (state, links) => {
+    state.links = links.map(link => link.data)
   }
 };

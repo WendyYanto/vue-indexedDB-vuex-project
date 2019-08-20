@@ -20,6 +20,7 @@
     <form @submit.prevent="createLink">
       <input type="text" v-model="link" />
     </form>
+    
   </div>
 </template>
 

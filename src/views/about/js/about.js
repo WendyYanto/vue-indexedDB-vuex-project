@@ -25,29 +25,30 @@ export default {
     ]),
   },
   methods: {
-    ...mapMutations('about', [
-      'addLink',
-      'removeAllLinks',
-    ]),
     ...mapActions('about', [
       'removeAll',
+      'getAllLinksFromIndexedDB',
+      'addLinkToIndexedDB'
     ]),
-    async createLink() {
+    createLink() {
       const self = this;
       if (self.link) {
-        await idbs.create('posts', self.link)
-        this.addLink(self.link);
-        this.link = '';
+        const data = {
+          'storeName': 'posts',
+          'link': self.link
+        }
+        this.addLinkToIndexedDB(data).then(() => {
+          this.link = '';
+        })
       }
     },
-    async reset() {
-      await idbs.deleteAll('posts')
+    reset() {
       if (this.countLinks === 0) {
         alert('No Data Available');
         return;
       }
       this.removeAll().then(() => {
-        alert('All Data Removed Successfully');
+        alert('All Data Removed Successfully')
       });
     },
     increaseFontSize() {
@@ -57,4 +58,7 @@ export default {
       this.fontSize -= 2;
     },
   },
+  mounted() {
+    this.getAllLinksFromIndexedDB('posts')
+  }
 };

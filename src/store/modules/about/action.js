@@ -1,13 +1,9 @@
 import idbs from '@/idb'
 
 export default {
-  removeAll({ commit }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('removeLinks');
-        resolve();
-      }, 1500);
-    });
+  async removeAll({ commit }, storeName) {
+    await idbs.deleteAll(storeName)
+    commit('removeLinks')
   },
   async getAllLinksFromIndexedDB({ commit }, storeName) {
     const links = await idbs.findAll(storeName)
@@ -17,5 +13,9 @@ export default {
   async addLinkToIndexedDB({ commit }, data) {
     await idbs.create(data.storeName, data.link)
     commit('addLink', data.link)
-  }
+  },
+  async deleteLinkFromIndexedDB({ commit }, data) {
+    await idbs.deleteByKey(data.storeName, data.key)
+    commit('removeLinkByIndex', data.index)
+  },
 };

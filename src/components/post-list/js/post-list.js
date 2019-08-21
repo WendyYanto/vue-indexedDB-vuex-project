@@ -1,4 +1,4 @@
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'PostList',
@@ -7,12 +7,17 @@ export default {
     fontSize: Number,
   },
   methods: {
-    ...mapMutations('about', [
-      'removeLinkByIndex',
+    ...mapActions('about', [
+      'deleteLinkFromIndexedDB',
     ]),
     deleteLink(index) {
       const self = this;
-      self.removeLinkByIndex(index);
+      const data = {
+        "storeName": "posts",
+        "key": self.data.text,
+        "index": index
+      }
+      self.deleteLinkFromIndexedDB(data);
     },
   }
 };

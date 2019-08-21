@@ -23,6 +23,7 @@ const create = async (storeName, post) => {
     }
     const transaction = dbPromise.transaction(storeName, 'readwrite');
     transaction.objectStore(storeName).put(JSON.stringify(data), post);
+
     return transaction.complete;
   } catch (error) {
     throw new Error(`Error During Storing Data With Error Message ${error}`);
@@ -34,6 +35,7 @@ const findAll = async (storeName) => {
     const dbPromise = await db();
     const transaction = dbPromise.transaction(storeName);
     const items = transaction.objectStore(storeName).getAll();
+
     return items
   } catch (error) {
     throw new Error(`Error During Getting All Data With Error Message ${error}`);
@@ -59,6 +61,7 @@ const deleteAll = async (storeName) => {
 const deleteByKey = async (storeName, key) => {
   try {
     const dbPromise = await db();
+    console.log(storeName)
     const transaction = dbPromise.transaction(storeName, 'readwrite')
     transaction.objectStore(storeName).delete(key)
   } catch (error) {

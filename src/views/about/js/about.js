@@ -47,7 +47,7 @@ export default {
         alert('No Data Available');
         return;
       }
-      this.removeAll().then(() => {
+      this.removeAll('posts').then(() => {
         alert('All Data Removed Successfully')
       });
     },

@@ -30,9 +30,12 @@ export default {
       'getAllLinksFromIndexedDB',
       'addLinkToIndexedDB'
     ]),
+    isNotBlank(data){
+      return data.trim() !== ""
+    },
     createLink() {
       const self = this;
-      if (self.link) {
+      if (this.isNotBlank(self.link)) {
         const data = {
           'storeName': 'posts',
           'link': self.link

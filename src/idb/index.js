@@ -19,7 +19,7 @@ const create = async (storeName, post) => {
     const date = new Date();
     const data = {
       "data": post,
-      "created_date": date.toString()
+      "created_at": date
     }
     const transaction = dbPromise.transaction(storeName, 'readwrite');
     transaction.objectStore(storeName).put(JSON.stringify(data), post);
@@ -46,12 +46,7 @@ const deleteAll = async (storeName) => {
   try {
     const dbPromise = await db();
     const transaction = dbPromise.transaction(storeName, 'readwrite');
-    const items = transaction.objectStore(storeName).getAllKeys();
-    items.then(data => {
-      data.forEach(key => {
-        transaction.objectStore(storeName).delete(key)
-      })
-    })
+    transaction.objectStore(storeName).clear()
   }
   catch (error) {
     throw new Error(`Error During Remove All Data With Error Message ${error}`)
